@@ -1,17 +1,28 @@
+"""
+Edited: 6/10/15
+Description: Universal node for getting module data from RPi sockets
+"""
+
 #!/usr/bin/env python
 import rospy
-from std_msgs.msg import String
+from std_msgs.msg import *
+from geometry_msgs.msg import *
+from sensor_msgs.msg import *
 import socket
 import sys
 import time
-	
+
 # ROS publisher setup
 rospy.init_node("read_socket")
-string_pub = rospy.Publisher('test_string', String, queue_size=10)
+PORT = rospy.get_param('~PORT')
+MESSAGE = rospy.get_param('~MESSAGE')
 
-# Socket setup	
+# PROBLEM: The MESSAGE is coming in as "String" rather than String
+module_pub = rospy.Publisher('test_string', MESSAGE, queue_size=10)
+
+# Socket setup
 HOST = '192.168.32.231'
-PORT = 8888
+#PORT = 8888
 buffer = 10
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -39,7 +50,7 @@ while True:
 			# Format data as a ROS message and publish
 			message = raw_msg + str(time_stamp)
 			print message
-			string_pub.publish(message)
+			module_pub.publish(message)
 	except socket.error, msg:
 		sys.stderr.write('Error: %s\n' % msg)
 		print 'Disconnected'

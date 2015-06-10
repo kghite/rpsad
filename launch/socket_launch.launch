@@ -1,0 +1,32 @@
+<!-- To switch sets of modules: Comment out unused nodes, edit RPi config -->
+
+<launch>
+
+	<node pkg="rpsad" type="read_socket.py" name="test_socket">
+		<param name="PORT" type="int" value="8888"/>
+		<param name="MESSAGE" value="String"/>
+	</node>
+
+<!--
+	<node pkg="rpsad" type="button_socket.py" name="button_socket">
+		<param name="PORT" value="8889"/>
+	</node>
+
+	<node  pkg="rpsad" type="imu_socket.py" name="imu_socket">
+		<param name="PORT" value="8890"/>
+	</node>
+
+	<node  pkg="rpsad" type="camera_socket.py" name="camera_socket">
+		<param name="PORT" value="8891"/>
+	</node>
+
+	<node  pkg="rpsad" type="flex_socket.py" name="flex_socket">
+		<param name="PORT" value="8892"/>
+	</node>
+
+	<node  pkg="rpsad" type="mic_socket.py" name="mic_socket">
+		<param name="PORT" value="8893"/>
+	</node>
+-->
+
+</launch>
